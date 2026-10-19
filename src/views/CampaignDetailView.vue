@@ -335,6 +335,7 @@ function dateLine(c) {
                     <span v-else-if="r.status !== 'Failed'" class="text-slate-400">No response yet</span>
                   </td>
                   <td class="px-4 py-3 text-right">
+                    <!-- WhatsApp simulator is hidden for now
                     <router-link
                       v-if="employeeById(r.employeeId)"
                       :to="{ name: 'simulator', query: { phone: r.phone } }"
@@ -343,7 +344,7 @@ function dateLine(c) {
                       :aria-label="`Open chat with ${r.name}`"
                     >
                       <MessageCircle class="size-4" />
-                    </router-link>
+                    </router-link> -->
                   </td>
                 </tr>
               </tbody>

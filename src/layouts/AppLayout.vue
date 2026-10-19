@@ -7,18 +7,18 @@ import {
   // UsersRound, // Phase 2: groups (disabled)
   Video,
   FileText,
-  BookOpenCheck,
+  // BookOpenCheck, // Knowledge base (hidden)
   Send,
-  MessageCircleQuestion,
+  // MessageCircleQuestion, // Employee queries (hidden)
   ChartColumn,
-  Smartphone,
+  // Smartphone, // WhatsApp simulator (hidden)
   Settings,
-  BookOpen,
+  // BookOpen, // Setup guide (hidden)
   LogOut,
   Menu,
   X
 } from 'lucide-vue-next'
-import { store, toast, can, currentUser, initials } from '@/data/store'
+import { /* store, */ toast, can, currentUser, initials } from '@/data/store' // store: only used by the hidden Employee queries badge
 import { setLoggedIn } from '@/data/auth'
 import BsvLogo from '@/components/BsvLogo.vue'
 
@@ -26,7 +26,8 @@ const route = useRoute()
 const router = useRouter()
 const sidebarOpen = ref(false)
 
-const openQueries = computed(() => store.queries.filter((q) => q.status === 'Not answered' && !q.reviewed).length)
+// Used by the Employee queries menu badge (menu hidden for now)
+// const openQueries = computed(() => store.queries.filter((q) => q.status === 'Not answered' && !q.reviewed).length)
 
 const sections = computed(() =>
   [
@@ -46,24 +47,28 @@ const sections = computed(() =>
       label: 'Content',
       items: [
         { name: 'Video library', to: 'videos', icon: Video },
-        { name: 'Templates', to: 'templates', icon: FileText },
-        { name: 'Knowledge base', to: 'knowledgeBase', icon: BookOpenCheck }
+        { name: 'Templates', to: 'templates', icon: FileText }
+        // Hidden for now:
+        // { name: 'Knowledge base', to: 'knowledgeBase', icon: BookOpenCheck }
       ]
     },
     {
       label: 'Engage',
       items: [
         { name: 'Campaigns', to: 'campaigns', icon: Send },
-        { name: 'Employee queries', to: 'queries', icon: MessageCircleQuestion, badge: openQueries.value },
+        // Hidden for now:
+        // { name: 'Employee queries', to: 'queries', icon: MessageCircleQuestion, badge: openQueries.value },
         { name: 'Reports & insights', to: 'insights', icon: ChartColumn }
       ]
     },
     {
       label: 'Tools',
       items: [
-        { name: 'WhatsApp simulator', to: 'simulator', icon: Smartphone },
-        { name: 'Settings', to: 'settings', icon: Settings, hidden: !can('settings') },
-        { name: 'Setup guide', to: 'setupGuide', icon: BookOpen }
+        // Hidden for now:
+        // { name: 'WhatsApp simulator', to: 'simulator', icon: Smartphone },
+        { name: 'Settings', to: 'settings', icon: Settings, hidden: !can('settings') }
+        // Hidden for now:
+        // { name: 'Setup guide', to: 'setupGuide', icon: BookOpen }
       ]
     }
   ].map((s) => ({ ...s, items: s.items.filter((i) => !i.hidden) }))

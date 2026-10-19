@@ -652,7 +652,8 @@ async function exportList() {
       </ul>
     </template>
     <template #footer>
-      <router-link v-if="viewing" :to="{ name: 'simulator', query: { phone: viewing.phone } }" class="btn-secondary"><Smartphone class="size-4" /> Open their WhatsApp chat</router-link>
+      <!-- WhatsApp simulator is hidden for now
+      <router-link v-if="viewing" :to="{ name: 'simulator', query: { phone: viewing.phone } }" class="btn-secondary"><Smartphone class="size-4" /> Open their WhatsApp chat</router-link> -->
       <button v-if="canEdit && viewing" type="button" class="btn-primary" @click="openEdit(viewing); viewing = null"><Pencil class="size-4" /> Edit</button>
     </template>
   </BaseModal>

@@ -1,6 +1,6 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
-import { Smartphone, ShieldCheck, Copy, Plus, Trash2, UserX, Server, Moon, RotateCcw, Loader2, Download, Search, RefreshCw, Database } from 'lucide-vue-next'
+import { Smartphone, ShieldCheck, Copy, Plus, Trash2, UserX, Server, /* Moon, (Quiet hours, hidden) */ RotateCcw, Loader2, Download, Search, RefreshCw, Database } from 'lucide-vue-next'
 import PageHeader from '@/components/PageHeader.vue'
 import StatusBadge from '@/components/StatusBadge.vue'
 import BaseModal from '@/components/BaseModal.vue'
@@ -9,7 +9,9 @@ import {
 } from '@/data/store'
 import { sampleImportRows, downloadWorkbook } from '@/data/files'
 
-const tabs = ['WhatsApp', 'Bot messages', 'Team & roles', 'HR integration', 'Opt-outs', 'Audit log', 'Demo data']
+// Only these tabs are shown for now. The others are commented out in the template below.
+// const tabs = ['WhatsApp', 'Bot messages', 'Team & roles', 'HR integration', 'Opt-outs', 'Audit log', 'Demo data']
+const tabs = ['WhatsApp', 'Team & roles', 'Opt-outs']
 const tab = ref('WhatsApp')
 const s = store.settings
 
@@ -220,6 +222,7 @@ const storageKb = computed(() => {
       </div>
     </div>
 
+    <!-- Quiet hours: hidden for now
     <div class="card p-6">
       <div class="flex items-center gap-3">
         <span class="flex size-10 items-center justify-center rounded-lg bg-indigo-50"><Moon class="size-5 text-indigo-600" /></span>
@@ -236,7 +239,7 @@ const storageKb = computed(() => {
         <div><label for="qh-to" class="label">To</label><input id="qh-to" v-model="s.quietHours.to" type="time" class="input" :disabled="!s.quietHours.enabled" /></div>
       </div>
       <button type="button" class="btn-secondary mt-4" @click="saveQuietHours">Save</button>
-    </div>
+    </div> -->
 
     <div class="card p-6">
       <div class="flex items-center gap-3">
@@ -257,7 +260,7 @@ const storageKb = computed(() => {
     </div>
   </div>
 
-  <!-- Bot messages -->
+  <!-- Bot messages: tab hidden for now (Settings shows only WhatsApp, Team & roles and Opt-outs)
   <form v-else-if="tab === 'Bot messages'" class="card max-w-3xl space-y-5 p-6" novalidate @submit.prevent="saveMessages">
     <div v-for="f in messageFields" :key="f.key">
       <label :for="`msg-${f.key}`" class="label">{{ f.label }}</label>
@@ -269,7 +272,7 @@ const storageKb = computed(() => {
       <button type="button" class="btn-secondary" @click="Object.assign(msgForm, s.messages)">Discard changes</button>
       <button type="submit" class="btn-primary">Save messages</button>
     </div>
-  </form>
+  </form> -->
 
   <!-- Team -->
   <div v-else-if="tab === 'Team & roles'" class="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -310,7 +313,7 @@ const storageKb = computed(() => {
     </div>
   </div>
 
-  <!-- HR integration (Phase 2) -->
+  <!-- HR integration (Phase 2): tab hidden for now (Settings shows only WhatsApp, Team & roles and Opt-outs)
   <div v-else-if="tab === 'HR integration'" class="card max-w-3xl p-6">
     <div class="flex items-start gap-3">
       <span class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-violet-50"><RefreshCw class="size-5 text-violet-600" /></span>
@@ -361,7 +364,7 @@ const storageKb = computed(() => {
         <span :class="lastResult.skipped ? 'text-red-700' : ''">{{ lastResult.skipped }} skipped (errors in HR data)</span>
       </p>
     </div>
-  </div>
+  </div> -->
 
   <!-- Opt-outs -->
   <div v-else-if="tab === 'Opt-outs'" class="card">
@@ -381,7 +384,7 @@ const storageKb = computed(() => {
     </div>
   </div>
 
-  <!-- Audit log -->
+  <!-- Audit log: tab hidden for now (Settings shows only WhatsApp, Team & roles and Opt-outs)
   <div v-else-if="tab === 'Audit log'" class="card">
     <div class="flex flex-col gap-3 border-b border-slate-200 p-4 sm:flex-row sm:items-center sm:justify-between">
       <div class="relative sm:w-80">
@@ -398,9 +401,9 @@ const storageKb = computed(() => {
       </li>
     </ul>
     <p v-if="!auditRows.length" class="px-5 py-8 text-center text-sm text-slate-500">No matching entries.</p>
-  </div>
+  </div> -->
 
-  <!-- Demo data -->
+  <!-- Demo data: tab hidden for now (Settings shows only WhatsApp, Team & roles and Opt-outs)
   <div v-else class="card max-w-2xl p-6">
     <div class="flex items-center gap-3">
       <span class="flex size-10 items-center justify-center rounded-lg bg-slate-100"><Database class="size-5 text-slate-600" /></span>
@@ -411,7 +414,7 @@ const storageKb = computed(() => {
     </div>
     <p class="mt-4 text-sm text-slate-600">Resetting restores the original sample employees, campaigns, questions and settings. Your login stays.</p>
     <button type="button" class="btn-danger mt-4" @click="resetOpen = true"><RotateCcw class="size-4" /> Reset demo data</button>
-  </div>
+  </div> -->
 
   <!-- Modals -->
   <BaseModal :open="inviteOpen" title="Invite a team member" @close="inviteOpen = false">
@@ -449,11 +452,12 @@ const storageKb = computed(() => {
     </template>
   </BaseModal>
 
+  <!-- Reset demo data modal (Demo data tab hidden for now)
   <BaseModal :open="resetOpen" title="Reset demo data?" size="sm" @close="resetOpen = false">
     <p class="text-sm text-slate-600">All changes made in this browser will be lost. This can't be undone.</p>
     <template #footer>
       <button type="button" class="btn-secondary" @click="resetOpen = false">Cancel</button>
       <button type="button" class="btn-danger" @click="confirmReset">Reset</button>
     </template>
-  </BaseModal>
+  </BaseModal> -->
 </template>

@@ -51,7 +51,8 @@ const checklist = computed(() => [
   { label: 'Connect the WhatsApp number', done: store.settings.connection === 'Connected', to: 'settings' },
   { label: 'Upload the employee list from HR', done: store.employees.length > 0, to: 'employees' },
   { label: 'Get a template approved by Meta', done: store.templates.some((t) => t.status === 'Approved' && t.type !== 'consent'), to: 'templates' },
-  { label: 'Add answers to the knowledge base', done: store.faqs.some((f) => f.active), to: 'knowledgeBase' },
+  // Knowledge base menu is hidden for now
+  // { label: 'Add answers to the knowledge base', done: store.faqs.some((f) => f.active), to: 'knowledgeBase' },
   { label: 'Send your first campaign', done: sentCampaigns.value.length > 0, to: 'campaigns' }
 ])
 
@@ -142,7 +143,8 @@ const greeting = computed(() => {
     </div>
   </div>
 
-  <div class="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
+  <!-- Was xl:grid-cols-2 while the Employee queries card was shown -->
+  <div class="mt-6 grid grid-cols-1 gap-6">
     <div class="card">
       <div class="flex items-center justify-between border-b border-slate-200 px-5 py-4">
         <h2 class="flex items-center gap-2 font-semibold text-ink"><Target class="size-5 text-orange-500" /> Weakest topics</h2>
@@ -164,6 +166,7 @@ const greeting = computed(() => {
       <p v-if="!weakTopics.length" class="px-5 py-8 text-center text-sm text-slate-500">No graded answers yet.</p>
     </div>
 
+    <!-- Employee queries card: hidden for now (Employee queries menu is commented out)
     <div class="card">
       <div class="flex items-center justify-between border-b border-slate-200 px-5 py-4">
         <h2 class="flex items-center gap-2 font-semibold text-ink"><MessageCircleQuestion class="size-5 text-amber-500" /> Questions the bot couldn't answer</h2>
@@ -176,6 +179,6 @@ const greeting = computed(() => {
         </li>
       </ul>
       <p v-if="!unanswered.length" class="px-5 py-8 text-center text-sm text-slate-500">All caught up. Every question was answered or reviewed.</p>
-    </div>
+    </div> -->
   </div>
 </template>

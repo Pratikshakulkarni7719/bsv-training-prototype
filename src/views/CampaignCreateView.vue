@@ -440,14 +440,16 @@ const contentPlaceholders = {
               </select>
             </div>
             <p v-if="errors.schedule" class="error-text sm:col-span-3">{{ errors.schedule }}</p>
+            <!-- Quiet hours warning: hidden for now (Quiet hours removed from Settings)
             <p v-else-if="inQuietHours(scheduledAt)" class="flex items-start gap-2 text-sm text-amber-800 sm:col-span-3">
               <TriangleAlert class="mt-0.5 size-4 shrink-0" />
               This is inside quiet hours ({{ store.settings.quietHours.from }}–{{ store.settings.quietHours.to }}). Employees may ignore late messages.
-            </p>
+            </p> -->
           </div>
+          <!-- Quiet hours warning: hidden for now (Quiet hours removed from Settings)
           <p v-else-if="inQuietHours(stamp())" class="flex items-start gap-2 text-sm text-amber-800">
             <TriangleAlert class="mt-0.5 size-4 shrink-0" /> It's quiet hours now ({{ store.settings.quietHours.from }}–{{ store.settings.quietHours.to }}). Consider scheduling for the morning.
-          </p>
+          </p> -->
 
           <div class="rounded-lg p-4 ring-1 ring-slate-200">
             <label class="flex items-center gap-3 text-sm font-medium text-slate-700">
